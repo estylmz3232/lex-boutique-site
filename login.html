@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+
+  <meta charset="UTF-8">
+  <title>Lex Boutique Men's Wear</title>
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <h1>Lex Boutique</h1>
+
+    <nav>
+      <a href="shop.html">Home</a>
+      <a href="login.html">Login</a>
+      <a href="register.html">Register</a>
+    </nav>
+  </header>
+
+  <section class="login-form">
+    <h2>Login</h2>
+    <form onsubmit="loginUser(event)">
+
+      <label for="email">Email:</label><br>
+      <input type="email" id="email" name="email" required><br><br>
+
+      <label for="password">Password:</label><br>
+      <input type="password" id="password" name="password" required><br><br>
+
+      <button type="submit">Login</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Lex Boutique Men's Wear</p>
+  </footer>
+  
+  <script>
+    function loginUser(event) {
+      event.preventDefault();
+  
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+  
+      const savedUser = JSON.parse(localStorage.getItem("registeredUser"));
+  
+      if (savedUser && email === savedUser.email && password === savedUser.password) {
+        alert("Login successful!");
+        window.location.href = "index.html";
+      } else {
+        alert("Incorrect email or password.");
+      }
+    }
+  </script>
+  
+  
+</body>
+</html>

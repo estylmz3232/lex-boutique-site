@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+
+  <meta charset="UTF-8">
+  <title>Lex Boutique Men's Wear</title>
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <h1>Lex Boutique</h1>
+
+    <nav>
+      <a href="shop.html">Home</a>
+      <a href="login.html">Login</a>
+      <a href="register.html">Register</a>
+      <a href="cart.html">Cart</a>
+    </nav>
+  </header>
+
+  <section class="cart-items">
+    <h2>Your Cart</h2>
+    
+
+    <div id="cart-container">
+      
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Lex Boutique Men's Wear</p>
+  </footer>
+  
+
+  <script>
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const container = document.getElementById("cart-container");
+  
+    if (cart.length === 0) {
+      container.innerHTML = "<p>Your cart is empty.</p>";
+    } else {
+      let total = 0;
+  
+      cart.forEach((item, index) => {
+        const div = document.createElement("div");
+        div.classList.add("product-card");
+  
+        div.innerHTML = `
+  <img src="${item.image}" alt="${item.title}" style="width:100px; height:auto; margin-bottom:10px;" />
+  <h3>${item.title}</h3>
+  <p>Price: $${item.price}</p>
+  <button onclick="removeItem(${index})">Remove</button>
+`;
+
+  
+        container.appendChild(div);
+        total += item.price;
+      });
+  
+      const totalElement = document.createElement("p");
+totalElement.innerHTML = `<strong>Total: $${total.toFixed(2)}</strong>`;
+container.appendChild(totalElement);
+
+// Clear Cart Button
+const clearBtn = document.createElement("button");
+clearBtn.textContent = "Clear Cart";
+clearBtn.onclick = clearCart;
+clearBtn.style.marginTop = "15px";
+container.appendChild(clearBtn);
+
+// ✅ Place Order Button
+const orderBtn = document.createElement("button");
+orderBtn.textContent = "Place Order";
+orderBtn.onclick = placeOrder;
+orderBtn.style.marginTop = "10px";
+container.appendChild(orderBtn);
+;
+
+    }
+  
+    function removeItem(index) {
+      cart.splice(index, 1);
+      localStorage.setItem("cart", JSON.stringify(cart)); 
+      location.reload(); 
+    }
+    function clearCart() {
+        localStorage.removeItem("cart");
+        location.reload();
+      }
+      function placeOrder() {
+        localStorage.removeItem("cart");
+        location.href = "thankyou.html";
+      }
+      
+      
+      
+  </script>
+  
+  
+
+</body>
+</html>
